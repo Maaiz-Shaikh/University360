@@ -1,10 +1,15 @@
 const express = require("express");
 const notes = require("./data/notes");
 const dotenv = require('dotenv');
+const connectDB = require('./config/db');
 const cors = require('cors');
 const app = express();
+const userRoutes = require('./routes/userRoutes');
+const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
 
 dotenv.config();
+connectDB();
+app.use(express.json());
 
 const corsOptions = {
     origin: 'http://localhost:3000',
@@ -21,10 +26,15 @@ app.get('/api/notes', (req, res) => {
     res.json(notes);
 })
 
-app.get('/api/notes/:id', (req, res) => {
-    const note = notes.find((n) => n._id === req.params.id);
-    res.send(note);
-});
+app.use('/api/users', userRoutes)
+
+app.use(notFound)
+app.use(errorHandler)
+
+// app.get('/api/notes/:id', (req, res) => {
+//     const note = notes.find((n) => n._id === req.params.id);
+//     res.send(note);
+// });
 
 const PORT = process.env.PORT || 5000;
 
