@@ -1,8 +1,11 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import { Form, FormControl, Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 
 function Header() {
+
+    const history = useHistory();
+
     return (
         <Navbar bg="primary" expand="lg" variant='dark'>
             <Container>
@@ -27,7 +30,12 @@ function Header() {
                         <NavDropdown title="Ravi Patel" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">My Profile</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.2">
+                            <NavDropdown.Item
+                                onClick={() => {
+                                    localStorage.removeItem("userInfo");
+                                    history.push("/");
+                                }}
+                            >
                                 Logout
                             </NavDropdown.Item>
                             {/* <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
