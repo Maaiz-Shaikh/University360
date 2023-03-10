@@ -1,40 +1,72 @@
 import React, { useEffect, useState } from 'react'
 import { Badge, Button, Card } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import MainScreen from '../../components/MainScreen'
 // import notes from '../../data/notes'
 import axios from 'axios';
+import { useDispatch, useSelector } from "react-redux";
+import { deleteNoteAction, listNotes } from '../../actions/notesActions';
+import Loading from '../../components/Loading';
+import ErrorMessage from '../../components/ErrorMessage';
 
-const MyNotes = () => {
+const MyNotes = ({ search }) => {
 
-    const [notes, setNotes] = useState([]);
+    const dispatch = useDispatch();
+
+    const noteList = useSelector(state => state.noteList);
+    const { loading, notes, error } = noteList;
+
+    const userLogin = useSelector((state) => state.userLogin);
+    const { userInfo } = userLogin;
+
+    const noteCreate = useSelector((state) => state.noteCreate);
+    const { success: successCreate } = noteCreate;
+
+    const noteUpdate = useSelector((state) => state.noteUpdate);
+    const { success: successUpdate } = noteUpdate;
+
+    const noteDelete = useSelector(state => state.noteDelete);
+    const { loading: loadingDelete, error: errorDelete, success: successDelete } = noteDelete;
+    // const [notes, setNotes] = useState([]);
 
     const deleteHandler = (id) => {
         if (window.confirm("Are you Sure?")) {
-
+            dispatch(deleteNoteAction(id));
         }
     };
 
-    const fetchNotes = async () => {
-        const { data } = await axios.get('http://localhost:5000/api/notes');
-        setNotes(data);
-    }
+    // const fetchNotes = async () => {
+    //     const { data } = await axios.get('http://localhost:5000/api/notes');
+    //     setNotes(data);
+    // }
+
+    const history = useHistory();
 
     useEffect(() => {
-        fetchNotes();
-    }, [])
+        dispatch(listNotes());
+        if (!userInfo) {
+            history.push("/");
+        }
+    }, [dispatch, successCreate, history, userInfo, successUpdate, successDelete]);
 
     return (
         <div>
-            <MainScreen title="Welcome back Ravi Patel...">
-                <Link to="/createnode">
+            <MainScreen title={`Welcome back ${userInfo.name}...`}>
+                <Link to="/createnote">
                     <Button style={{ margin: 10, marginBottom: 10 }} size="lg">
-                        Create New Node
+                        Create New Note
                     </Button>
                 </Link>
-
+                {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+                {errorDelete && (
+                    <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
+                )}
+                {loading && <Loading />}
+                {loadingDelete && <Loading />}
                 {
-                    notes.map(note => {
+                    notes?.filter(
+                        filteredNote => (filteredNote.title.toLowerCase().includes(search.toLowerCase()))
+                    ).reverse().map(note => {
                         return <Card key={note._id}>
                             <Card.Header style={{ display: "flex" }}>
                                 <Link to={`/note/${note._id}`} style={{
@@ -63,7 +95,10 @@ const MyNotes = () => {
                                 <Badge bg='info'>{note.category}</Badge>
                                 <Card.Title>{note.title}</Card.Title>
                                 <Card.Text>
-                                    {note.content}
+                                    <td dangerouslySetInnerHTML={{ __html: note.content }} />
+                                    {/* {note.content}  */}
+                                    <br></br>
+                                    {note.createdAt.substring(0, 10)}
                                 </Card.Text>
                             </Card.Body>
                         </Card>

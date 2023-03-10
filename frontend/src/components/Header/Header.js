@@ -4,7 +4,7 @@ import { Form, FormControl, Nav, Navbar, NavDropdown, Container } from "react-bo
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/userActions';
 
-function Header() {
+function Header({ setSearch }) {
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -20,7 +20,7 @@ function Header() {
     return (
         <Navbar bg="primary" expand="lg" variant='dark'>
             <Container>
-                <Navbar.Brand><Link to="/">Note Zipper</Link></Navbar.Brand>
+                <Navbar.Brand><Link to="/">Newsify</Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
 
@@ -31,6 +31,7 @@ function Header() {
                                 placeholder="Search"
                                 className="mr-sm-2"
                                 aria-label="Search"
+                                onChange={(e) => setSearch(e.target.value)}
                             />
                         </Form>
                     </Nav>
@@ -38,7 +39,7 @@ function Header() {
                     <Nav className="me-auto">
                         <Nav.Link id="RouterNavLink"><Link to="/mynotes">MyNotes</Link></Nav.Link>
                         {/* <Nav.Link href="#link">Ravi Patel</Nav.Link> */}
-                        <NavDropdown title="Ravi Patel" id="basic-nav-dropdown">
+                        <NavDropdown title="Chintan Bhatt" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">My Profile</NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item
