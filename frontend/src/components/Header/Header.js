@@ -25,38 +25,35 @@ function Header({ setSearch }) {
                 <Navbar.Collapse id="basic-navbar-nav">
 
                     <Nav className='m-auto'>
-                        <Form>
-                            <FormControl
-                                type="text"
-                                placeholder="Search"
-                                className="mr-sm-2"
-                                aria-label="Search"
-                                onChange={(e) => setSearch(e.target.value)}
-                            />
-                        </Form>
+                        {userInfo && (
+                            <Form>
+                                <FormControl
+                                    type="text"
+                                    placeholder="Search"
+                                    className="mr-sm-2"
+                                    aria-label="Search"
+                                    onChange={(e) => setSearch(e.target.value)}
+                                />
+                            </Form>
+                        )}
                     </Nav>
 
                     <Nav className="me-auto">
-                        <Nav.Link id="RouterNavLink"><Link to="/mynotes">MyNotes</Link></Nav.Link>
-                        {/* <Nav.Link href="#link">Ravi Patel</Nav.Link> */}
-                        <NavDropdown title="Chintan Bhatt" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">My Profile</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item
-                                onClick={logoutHandler}
-                            // () => {
-                            //     localStorage.removeItem("userInfo");
-                            //     history.push("/");
-                            // }
-                            >
-                                Logout
-                            </NavDropdown.Item>
-                            {/* <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">
-                                Separated link
-                            </NavDropdown.Item> */}
-                        </NavDropdown>
+                        {userInfo ? (
+                            <>
+                                <Nav.Link id="RouterNavLink"><Link to="/mynotes">MyNotes</Link></Nav.Link>
+                                {/* <Nav.Link href="#link">Ravi Patel</Nav.Link> */}
+                                <NavDropdown title={userInfo?.name} id="basic-nav-dropdown">
+                                    <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item onClick={logoutHandler}>
+                                        Logout
+                                    </NavDropdown.Item>
+                                </NavDropdown>
+                            </>
+                        ) : (
+                            <Nav.Link href="/login">Login</Nav.Link>
+                        )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
