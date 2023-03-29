@@ -83,12 +83,28 @@ function CreateNote({ history }) {
                         <Form.Group controlId="content">
                             <Form.Label>Category</Form.Label>
                             <Form.Control
+                                as="select"
+                                value={category}
+                                onChange={(e) => setCategory(e.target.value)}
+                            >
+                                <option value="" hidden>---Select Category---</option>
+                                <option value="Faculty">Faculty</option>
+                                <option value="Students">Students</option>
+                                <option value="Achievements">Achievements</option>
+                                <option value="General">General</option>
+                            </Form.Control>
+                        </Form.Group>
+
+                        {/* <Form.Group controlId="content">
+                            <Form.Label>Category</Form.Label>
+                            <Form.Control
                                 type="content"
                                 value={category}
                                 placeholder="Enter the Category"
                                 onChange={(e) => setCategory(e.target.value)}
                             />
-                        </Form.Group>
+                        </Form.Group> */}
+
                         {loading && <Loading size={50} />}
                         <br></br>
                         <Button type="submit" variant="primary">
