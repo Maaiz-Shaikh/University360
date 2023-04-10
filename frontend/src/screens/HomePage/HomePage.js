@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./HomePage.css";
 // import { images } from "./CarauselData";
-import City from "../../images/pdpu1.png";
-import Salvador from "../../images/pdpu2.jpg";
+import City from "../../images/pdpu1.jpg";
+import Salvador from "../../images/pdpu2.png";
 import Ubc from "../../images/pdpu3.jpg";
 
 // import backIcon from "../Images/back_icon.png";

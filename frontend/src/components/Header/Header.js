@@ -1,4 +1,5 @@
 import React from 'react';
+import './Header.css';
 import { Link, NavLink, useHistory } from 'react-router-dom';
 import { Form, FormControl, Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,7 +19,7 @@ function Header({ setSearch }) {
     };
 
     return (
-        <Navbar bg="primary" expand="lg" variant='dark'>
+        <Navbar bg="primary" expand="lg" variant='dark' className='fixNavbar'> 
             <Container>
                 <Navbar.Brand><Link to="/">Newsify</Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -52,7 +53,7 @@ function Header({ setSearch }) {
                                 </NavDropdown>
                             </>
                         ) : (
-                            <Nav.Link href="/login">Login</Nav.Link>
+                            <Nav.Link href="/landing">Login</Nav.Link>
                         )}
                     </Nav>
                 </Navbar.Collapse>

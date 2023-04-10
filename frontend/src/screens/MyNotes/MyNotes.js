@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 // import { Badge, Button, Card } from 'react-bootstrap'
-import { Accordion, Badge, Button, Card } from 'react-bootstrap';
+import {  Badge, Button, Card } from 'react-bootstrap';
+import Accordion from 'react-bootstrap/Accordion';
 import { Link, useHistory } from 'react-router-dom'
 import MainScreen from '../../components/MainScreen'
 // import notes from '../../data/notes'
@@ -44,10 +45,10 @@ const MyNotes = ({ search }) => {
 
     const history = useHistory();
 
-    const [activeTab, setActiveTab] = useState('Students');
+    const [activeTab, setActiveTab] = useState('General');
 
     const handleTabClick = (tabName) => {
-        console.log(tabName);
+        // console.log(tabName);
         setActiveTab(tabName);
     };
 
@@ -60,7 +61,8 @@ const MyNotes = ({ search }) => {
 
     return (
         <div>
-            <MainScreen title={`Welcome back ${userInfo.name}...`}>
+            <MainScreen            
+             title={`Welcome back ${userInfo.name}...`}>
                 <Link to="/createnote">
                     <Button style={{ margin: 10, marginBottom: 10 }} size="lg">
                         Create New Note
@@ -73,32 +75,39 @@ const MyNotes = ({ search }) => {
                 {loading && <Loading />}
                 {loadingDelete && <Loading />}
 
-                <div className='flexdiv'>
-                    <nav className="navbar">
-                        <ul className="navbar-nav">
-                            <Button className={`nav-item ${activeTab === 'Students' ? 'active' : ''}`} onClick={() => handleTabClick('Students')}>
-                                Students
-                            </Button>
-                            <Button className={`nav-item ${activeTab === 'Faculty' ? 'active' : ''}`} onClick={() => handleTabClick('Faculty')}>
-                                Faculty
-                            </Button>
-                            <Button className={`nav-item ${activeTab === 'Achievements' ? 'active' : ''}`} onClick={() => handleTabClick('Achievements')}>
-                                Achievements
-                            </Button>
-                            <Button className={`nav-item ${activeTab === 'General' ? 'active' : ''}`} onClick={() => handleTabClick('General')}>
+                <div>
+            
+                    <nav>
+                        <ul className="fix">
+                            <Button className={`${activeTab === 'General' ? 'active' : ''}`} onClick={() => handleTabClick('General')}>
                                 General
                             </Button>
+                            <Button className={` ${activeTab === 'Faculty' ? 'active' : ''}`} onClick={() => handleTabClick('Faculty')}>
+                                Faculty
+                            </Button>
+                            <Button className={`${activeTab === 'Students' ? 'active' : ''}`} onClick={() => handleTabClick('Students')}>
+                                Students
+                            </Button>
+                         
+                            <Button className={`${activeTab === 'Achievements' ? 'active' : ''}`} onClick={() => handleTabClick('Achievements')}>
+                                Achievements
+                            </Button>
+                            <Button className={`${activeTab === 'Events' ? 'active' : ''}`} onClick={() => handleTabClick('Events')}>
+                                Events
+                            </Button>
+                            
+
                         </ul>
                     </nav>
-
+                
                     <div className='mainContent'>
                         {
                             notes?.filter(
                                 filteredNote => (filteredNote.title.toLowerCase().includes(search.toLowerCase()) &&
                                     (activeTab === 'General' || filteredNote.category === activeTab))
                             ).reverse().map(note => {
-                                return <Accordion key={note._id}>
-                                    <Accordion.Item eventkey="0">
+                                return <Accordion className='accordion' key={note._id}>
+                                    {/* <Accordion> */}
                                         <Card style={{ margin: 10 }}>
                                             <Card.Header style={{ display: 'flex' }}>
 
@@ -107,7 +116,7 @@ const MyNotes = ({ search }) => {
                                                     textDecoration: 'none',
                                                     flex: 1,
                                                     cursor: 'pointer',
-                                                    // alignSelf: 'center',
+                                                    alignSelf: 'center',
                                                     fontSize: 8,
                                                 }}>
 
@@ -119,7 +128,7 @@ const MyNotes = ({ search }) => {
                                                 </span>
                                                 {(note.user === userInfo._id) ?
                                                     <div>
-                                                        <Button href={`/note/${note._id}`}>Edit</Button>
+                                                        <Button style={{margin:'20px 15px'}} href={`/note/${note._id}`}>Edit</Button>
                                                         <Button variant='danger' className='mx-2' onClick={() => deleteHandler(note._id)}>Delete</Button>
                                                     </div>
                                                     : <div></div>
@@ -147,53 +156,20 @@ const MyNotes = ({ search }) => {
                                             {/* </Accordion.Collapse> */}
 
                                         </Card>
-                                    </Accordion.Item>
+                                    {/* </Accordion> */}
                                 </Accordion>
-                            })
-                            // <Card key={note._id}>
-                            //     <Card.Header style={{ display: "flex" }}>
-                            //         <Link to={`/note/${note._id}`} style={{
-                            //             flex: 1,
-                            //             cursor: "pointer",
-                            //             alignSelf: "center",
-                            //         }}>
-                            //             <span
-                            //                 style={{
-                            //                     color: "black",
-                            //                     textDecoration: "none",
-                            //                     flex: 1,
-                            //                     cursor: "pointer",
-                            //                     alignSelf: "center",
-                            //                     fontSize: 20,
-                            //                 }}
-                            //             >{note.title}</span></Link>
-                            //         <div>
-                            //             <Button href={`/note/${note._id}`}>Edit</Button>
-                            //             <Button variant='danger' className='mx-2'
-                            //                 onClick={() => deleteHandler(note._id)}
-                            //             >Delete</Button>
-                            //         </div>
-                            //     </Card.Header>
-                            //     <Card.Body>
-                            //         <Badge bg='info'>{note.category}</Badge>
-                            //         <Card.Title>{note.title}</Card.Title>
-                            //         <Card.Text>
-                            //             <td dangerouslySetInnerHTML={{ __html: note.content }} />
-                            //             {/* {note.content}  */}
-                            //             <br></br>
-                            //             {note.createdAt.substring(0, 10)}
-                            //         </Card.Text>
-                            //     </Card.Body>
-                            // </Card>
+
+                            }
 
 
+                            )
                         }
                     </div>
                 </div>
 
 
             </MainScreen>
-        </div >
+        </div>
     )
 }
 

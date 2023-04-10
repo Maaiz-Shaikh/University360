@@ -92,6 +92,7 @@ function CreateNote({ history }) {
                                 <option value="Students">Students</option>
                                 <option value="Achievements">Achievements</option>
                                 <option value="General">General</option>
+                                <option value="Events">Events</option>
                             </Form.Control>
                         </Form.Group>
 
