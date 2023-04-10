@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./HomePage.css";
 // import { images } from "./CarauselData";
 import City from "../../images/pdpu1.jpg";
-import Salvador from "../../images/pdpu2.png";
+import Salvador from "../../images/pdpu2.jpg";
 import Ubc from "../../images/pdpu3.jpg";
 
 // import backIcon from "../Images/back_icon.png";
@@ -11,17 +11,17 @@ import Ubc from "../../images/pdpu3.jpg";
 function Carousel() {
   const [currImg, setCurrImg] = useState(0);
   const images = [
-    { title: "San Diego",
+    { title: "PDEU",
       subtitle: "PDEU", 
       img: City },
     {
-      title: "Salvador, Brazil",
-      subtitle: "The Best City in the World",
+      title: "PDPU",
+      subtitle: "PDPU",
       img: Salvador,
     },
     {
-      title: "UBC (Vancouver)",
-      subtitle: "The University of British Columbia",
+      title: "PDPU",
+      subtitle: "PDPU",
       img: Ubc,
     },
   ];
@@ -62,20 +62,18 @@ function Carousel() {
         <div class="row" data-aos="zoom-in-up">
           <div class="course-colomn">
             <h3>NAAC Accreditation </h3>
-            <p> with 'A++' & CGPA of 3.52 out of 4.00</p>
+            <p> Accredited by the National Assessment and Accreditation Council (NAAC) with an 'A++' grade & CGPA of 3.52 out of 4.00</p>
           </div>
           <div class="course-colomn">
-            <h3>Lorem Ipsum</h3>
+            <h3>Centre of Excellence</h3>
             <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text{" "}
+            Recognized as a "Centre of Excellence in Oil, Gas, and Energy" by the Government of Gujarat.
             </p>
           </div>
           <div class="course-colomn">
-            <h3>Lorem Ipsum</h3>
+            <h3>Green Campus</h3>
             <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text{" "}
+            Recognized as a "Green Campus" by the Gujarat Pollution Control Board for its sustainable practices and initiatives
             </p>
           </div>
         </div>
@@ -101,10 +99,9 @@ function Carousel() {
         <p>
           Made By <i class="far fa-heart"></i> G5-team
         </p>
-        <p>
-          {" "}
+        {/* <p>
           <i class="fa fa-copyright"></i> copyright 2023 || All rights reserved
-        </p>
+        </p> */}
       </section>
     </div>
     </>

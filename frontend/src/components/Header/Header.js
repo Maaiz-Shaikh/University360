@@ -21,7 +21,7 @@ function Header({ setSearch }) {
     return (
         <Navbar bg="primary" expand="lg" variant='dark' className='fixNavbar'> 
             <Container>
-                <Navbar.Brand><Link to="/">Newsify</Link></Navbar.Brand>
+                <Navbar.Brand><Link to="/">University360</Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
 
