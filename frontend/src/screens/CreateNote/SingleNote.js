@@ -109,11 +109,15 @@ function SingleNote({ match, history }) {
                         <Form.Group controlId="content">
                             <Form.Label>Category</Form.Label>
                             <Form.Control
-                                type="content"
-                                placeholder="Enter the Category"
+                                as="select"
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value)}
-                            />
+                            >
+                                <option value="Faculty">Faculty</option>
+                                <option value="Students">Students</option>
+                                <option value="Achievements">Achievements</option>
+                                <option value="General">General</option>
+                            </Form.Control>
                         </Form.Group>
                         {loading && <Loading size={50} />}
                         <Button variant="primary" type="submit">
