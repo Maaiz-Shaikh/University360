@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 function Footer() {
     return (
@@ -16,7 +16,7 @@ function Footer() {
             <Container>
                 {/* <Row> */}
                 <p>
-          <i class="fa fa-copyright"></i> copyright 2023 || All rights reserved
+                    <i class="fa fa-copyright"></i> copyright 2023 || All rights reserved
                 </p>
                 {/* </Row> */}
             </Container>

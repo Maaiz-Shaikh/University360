@@ -20,7 +20,7 @@ function CreateNote({ history }) {
     const noteCreate = useSelector((state) => state.noteCreate);
     const { loading, error, note } = noteCreate;
 
-    console.log(note);
+    // console.log(note);
 
     const resetHandler = () => {
         setTitle("");
@@ -32,8 +32,8 @@ function CreateNote({ history }) {
         e.preventDefault();
         dispatch(createNoteAction(title, content, category));
         if (!title || !content || !category) return;
-
         resetHandler();
+
         history.push("/mynotes");
     };
 

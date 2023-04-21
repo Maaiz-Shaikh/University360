@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteNoteAction, updateNoteAction } from "../../actions/notesActions";
 import ErrorMessage from "../../components/ErrorMessage";
 import Loading from "../../components/Loading";
-import ReactMarkdown from "react-markdown";
+// import ReactMarkdown from "react-markdown";
 import JoditEditor from 'jodit-react';
 
 function SingleNote({ match, history }) {
