@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 // import { Badge, Button, Card } from 'react-bootstrap'
-import {  Badge, Button, Card } from 'react-bootstrap';
+import { Badge, Button, Card } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
 import { Link, useHistory } from 'react-router-dom'
 import MainScreen from '../../components/MainScreen'
 // import notes from '../../data/notes'
-import axios from 'axios';
+// import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteNoteAction, listNotes } from '../../actions/notesActions';
 import Loading from '../../components/Loading';
@@ -61,8 +61,8 @@ const MyNotes = ({ search }) => {
 
     return (
         <div>
-            <MainScreen            
-             title={`Welcome back ${userInfo.name}...`}>
+            <MainScreen
+                title={`Welcome back ${userInfo.name}...`}>
                 <Link to="/createnote">
                     <Button style={{ margin: 10, marginBottom: 10 }} size="lg">
                         Create New Note
@@ -76,7 +76,7 @@ const MyNotes = ({ search }) => {
                 {loadingDelete && <Loading />}
 
                 <div>
-            
+
                     <nav>
                         <ul className="fix">
                             <Button className={`${activeTab === 'General' ? 'active' : ''}`} onClick={() => handleTabClick('General')}>
@@ -88,18 +88,18 @@ const MyNotes = ({ search }) => {
                             <Button className={`${activeTab === 'Students' ? 'active' : ''}`} onClick={() => handleTabClick('Students')}>
                                 Students
                             </Button>
-                         
+
                             <Button className={`${activeTab === 'Achievements' ? 'active' : ''}`} onClick={() => handleTabClick('Achievements')}>
                                 Achievements
                             </Button>
                             <Button className={`${activeTab === 'Events' ? 'active' : ''}`} onClick={() => handleTabClick('Events')}>
                                 Events
                             </Button>
-                            
+
 
                         </ul>
                     </nav>
-                
+
                     <div className='mainContent'>
                         {
                             notes?.filter(
@@ -108,54 +108,54 @@ const MyNotes = ({ search }) => {
                             ).reverse().map(note => {
                                 return <Accordion className='accordion' key={note._id}>
                                     {/* <Accordion> */}
-                                        <Card style={{ margin: 10 }}>
-                                            <Card.Header style={{ display: 'flex' }}>
+                                    <Card style={{ margin: 10 }}>
+                                        <Card.Header style={{ display: 'flex' }}>
 
-                                                <span style={{
-                                                    color: 'black',
-                                                    textDecoration: 'none',
-                                                    flex: 1,
-                                                    cursor: 'pointer',
-                                                    alignSelf: 'center',
-                                                    fontSize: 8,
-                                                }}>
+                                            <span style={{
+                                                color: 'black',
+                                                textDecoration: 'none',
+                                                flex: 1,
+                                                cursor: 'pointer',
+                                                alignSelf: 'center',
+                                                fontSize: 8,
+                                            }}>
 
 
-                                                    <Accordion.Header>
-                                                        {note.title}
-                                                    </Accordion.Header>
+                                                <Accordion.Header>
+                                                    {note.title}
+                                                </Accordion.Header>
 
-                                                </span>
-                                                {(note.user === userInfo._id) ?
-                                                    <div>
-                                                        <Button style={{margin:'20px 15px'}} href={`/note/${note._id}`}>Edit</Button>
-                                                        <Button variant='danger' className='mx-2' onClick={() => deleteHandler(note._id)}>Delete</Button>
-                                                    </div>
-                                                    : <div></div>
-                                                }
-                                            </Card.Header>
-                                            {/* <Accordion.Collapse eventKey='0'> */}
-                                            <Accordion.Body>
-                                                <Card.Body>
-                                                    <h4>
-                                                        <Badge bg="success">
-                                                            Category - {note.category}
-                                                        </Badge>
-                                                    </h4>
-                                                    <blockquote className="blockquote mb-0">
-                                                        <p>
-                                                            <td dangerouslySetInnerHTML={{ __html: note.content }} />
-                                                        </p>
-                                                        <footer className="blockquote-footer">
-                                                            Created On - date {note.createdAt.substring(0, 10)}
-                                                        </footer>
-                                                    </blockquote>
-                                                </Card.Body>
-                                            </Accordion.Body>
+                                            </span>
+                                            {(note.user === userInfo._id) ?
+                                                <div>
+                                                    <Button style={{ margin: '20px 15px' }} href={`/note/${note._id}`}>Edit</Button>
+                                                    <Button variant='danger' className='mx-2' onClick={() => deleteHandler(note._id)}>Delete</Button>
+                                                </div>
+                                                : <div></div>
+                                            }
+                                        </Card.Header>
+                                        {/* <Accordion.Collapse eventKey='0'> */}
+                                        <Accordion.Body>
+                                            <Card.Body>
+                                                <h4>
+                                                    <Badge bg="success">
+                                                        Category - {note.category}
+                                                    </Badge>
+                                                </h4>
+                                                <blockquote className="blockquote mb-0">
+                                                    <p>
+                                                        <td dangerouslySetInnerHTML={{ __html: note.content }} />
+                                                    </p>
+                                                    <footer className="blockquote-footer">
+                                                        Created On - date {note.createdAt.substring(0, 10)}
+                                                    </footer>
+                                                </blockquote>
+                                            </Card.Body>
+                                        </Accordion.Body>
 
-                                            {/* </Accordion.Collapse> */}
+                                        {/* </Accordion.Collapse> */}
 
-                                        </Card>
+                                    </Card>
                                     {/* </Accordion> */}
                                 </Accordion>
 

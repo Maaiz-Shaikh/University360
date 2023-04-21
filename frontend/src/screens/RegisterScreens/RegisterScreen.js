@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { register } from '../../actions/userActions';
 import ErrorMessage from '../../components/ErrorMessage';
 import Loading from '../../components/Loading';
@@ -20,7 +20,7 @@ const RegisterScreen = () => {
     const [picMessage, setPicMessage] = useState(null);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
-    const history = useHistory();
+    // const history = useHistory();
 
     const dispatch = useDispatch();
 
